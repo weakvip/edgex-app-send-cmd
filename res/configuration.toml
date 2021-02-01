@@ -1,0 +1,44 @@
+[Writable]
+LogLevel = 'DEBUG'
+    [Writable.StoreAndForward]
+    Enabled = false
+    RetryInterval = '5m'
+    MaxRetryCount = 10
+
+[Service]
+BootTimeout = '30s'
+ClientMonitor = '15s'
+CheckInterval = '10s'
+Host = '172.26.240.14'
+Port = 48095
+Protocol = 'http'
+ReadMaxLimit = 100
+StartupMsg = 'This is a sample Application Service to receive HTTP request as trigger'
+Timeout = '30s'
+
+[Registry]
+Host = '172.26.240.14'
+Port = 8500
+Type = 'consul'
+
+[Logging]
+EnableRemote = false
+File = ''
+
+[Clients]
+  [Clients.Logging]
+  Protocol = "http"
+  Host = "172.26.240.14"
+  Port = 48061
+  [Clients.Command]
+  Protocol = 'http'
+  Host = '172.26.240.14'
+  Port = 48082
+
+# This example expect custom type via HTTP Trigger
+[Binding]
+Type="http"
+
+[ApplicationSettings]
+DeviceID  = "1ad08fe5-9bc4-467f-bd0c-62f00204f856"
+CommandID = "770d536c-40fc-45be-a692-9d531a24dbb2"
